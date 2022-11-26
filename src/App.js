@@ -39,15 +39,19 @@ function App() {
   },[]);
 
   const onAddToCart = (obj) =>{
-    axios.post('https://63760f70b5f0e1eb85017e9f.mockapi.io/cart', obj);
+    axios.post('https://63760f70b5f0e1eb85017e9f.mockapi.io/cart', obj); // отправляем запрос на сервер
     // создание
-      
-
     // setCartItems([...cartItems, obj]);
-    setCartItems(prev => [...prev, obj]);  
+    setCartItems(prev => [...prev, obj]);  // визуально сохраняем в usestate
   // console.log(obj);
   };
   //  console.log(cartItems);
+
+  const onRemoveItem = (id) =>{
+    //console.log(id);
+    axios.delete(`https://63760f70b5f0e1eb85017e9f.mockapi.io/cart/${id}`); 
+    setCartItems((prev) => prev.filter(item => item.id !== id));  // визуальная очистка корзины
+  }
 
   const onChangeSearchInput = (event) => {
     //console.log(event.target.value);
@@ -58,7 +62,7 @@ function App() {
 
     <div className="wrapper clear ">
 
-      {cartOpened && <Drawer items = {cartItems} onClose = {() => setCartOpened(false)} /> }
+      {cartOpened && <Drawer items = {cartItems} onClose = {() => setCartOpened(false)} onRemove={onRemoveItem}/> }
 
       <Header onClickCart = {() => setCartOpened(true) }  />
 
