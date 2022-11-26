@@ -1,5 +1,6 @@
 function Drawer({onClose, items = []}){
     return(
+      <div className="overlay">
         <div className="drawer d-flex flex-column">
         <h2 className="mb-30 d-flex justify-between">Корзина
         <img onClick = {onClose} className="removeBtn cu-p" src="/img/btn-remove.svg" alt="Remove"/>
@@ -44,7 +45,7 @@ function Drawer({onClose, items = []}){
           </div>
         
 
-     
+          </div>
 
       </div>
     );

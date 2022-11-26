@@ -6,6 +6,7 @@ import { useState,useEffect } from 'react';
 import axios from 'axios';
 
 
+
 const arr = [
 
 ];
@@ -19,6 +20,7 @@ function App() {
 
 
   React.useEffect(()=>{
+
     // fetch('https://63760f70b5f0e1eb85017e9f.mockapi.io/items')
     // .then( (res) => {
     //   return res.json();
@@ -26,13 +28,21 @@ function App() {
     // .then((json) => {
     //   setItems(json);
     // });
-     axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/items').then((res)=>{
+
+     axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/items').then((res)=>{ // получение
       setItems(res.data);
     });
+    axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/cart').then((res)=>{ // получение
+    setCartItems(res.data);
+  });
 
   },[]);
 
   const onAddToCart = (obj) =>{
+    axios.post('https://63760f70b5f0e1eb85017e9f.mockapi.io/cart', obj);
+    // создание
+      
+
     // setCartItems([...cartItems, obj]);
     setCartItems(prev => [...prev, obj]);  
   // console.log(obj);
@@ -46,13 +56,13 @@ function App() {
 
   return (
 
-    <div className="wrapper clear">
+    <div className="wrapper clear ">
 
       {cartOpened && <Drawer items = {cartItems} onClose = {() => setCartOpened(false)} /> }
 
-      <Header onClickCart = {() => setCartOpened(true)}  />
+      <Header onClickCart = {() => setCartOpened(true) }  />
 
-     <div className="content p-40">
+     <div className="content p-40 ">
       <div className="d-flex align-center mb-40 justify-between">
       <h1> {(searchValue!='') ?`Поиск по запросу: "${searchValue}"` : `Все кроссовки`}</h1>
       
