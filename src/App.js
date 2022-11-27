@@ -16,7 +16,7 @@ function App() {
   const [searchValue, setSearchValue] = React.useState(['']);
   const [cartItems, setCartItems] = React.useState([]); // сюда передается обьект onAddToCart
   const [cartOpened , setCartOpened] = React.useState(false);
-  const[favourites, setFavourites] = React.useState(false);
+  const [favorites, setFavorites] = React.useState(false);
 
 
 
@@ -30,39 +30,37 @@ function App() {
     //   setItems(json);
     // });
 
-     axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/items').then((res)=>{ // получение
+     axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/items').then((res)=> { // получение
       setItems(res.data);
     });
-    axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/cart').then((res)=>{ // получение
+    axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/cart').then((res)=> { // получение
     setCartItems(res.data);
   });
 
+    axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/favotites').then((res)=> {
+      setFavorites(res.data);
+    })
+
   },[]);
 
-  const onAddToCart = (obj) =>{
+  const onAddToCart = (obj) => {
     axios.post('https://63760f70b5f0e1eb85017e9f.mockapi.io/cart', obj); // отправляем запрос на сервер
-    // создание
-    // setCartItems([...cartItems, obj]);
     setCartItems(prev => [...prev, obj]);  // визуально сохраняем в usestate
-  // console.log(obj);
   };
-  //  console.log(cartItems);
 
-  const onRemoveItem = (id) =>{
-    //console.log(id);
+  const onRemoveItem = (id) => {
     axios.delete(`https://63760f70b5f0e1eb85017e9f.mockapi.io/cart/${id}`); 
     setCartItems((prev) => prev.filter(item => item.id !== id));  // визуальная очистка корзины
-  }
+  };
 
   const onChangeSearchInput = (event) => {
-    //console.log(event.target.value);
     setSearchValue(event.target.value);
-  }
+  };
 
-  const onAddToFavourite = (obj) => {
-    axios.post('https://63760f70b5f0e1eb85017e9f.mockapi.io/favourites', obj); 
-    setFavourites((prev) => [...prev,obj]);
-  }
+  const onAddToFavorite = (obj) => {
+    axios.post('https://63760f70b5f0e1eb85017e9f.mockapi.io/favotites', obj); 
+    setFavorites(prev => [...prev, obj]);
+  };
 
   return (
 
@@ -95,8 +93,8 @@ function App() {
           title={item.title}
           price = {item.price}
           imageURL = {item.imageURL}
-          onFavourite={ () => console.log("Добавили в закладки")}
-          onPlus={(obj) =>onAddToCart(obj)}
+          onFavorite={(obj) => onAddToFavorite(obj)}
+          onPlus={(obj) => onAddToCart(obj)}
           />
         ))}
 
