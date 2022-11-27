@@ -5,6 +5,7 @@ import Drawer from './components/Drawer';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import Home from './pages/Home';
+import Favorites from './pages/Favorites';
 
 
 
@@ -38,6 +39,10 @@ function App() {
     axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/cart').then((res)=> { // получение
     setCartItems(res.data);
   });
+
+  axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/favorites').then((res)=> { // получение
+  setCartItems(res.data);
+});
 
     axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/favotites').then((res)=> {
       setFavorites(res.data);
@@ -75,6 +80,7 @@ function App() {
 
       
       <Routes>
+
       <Route path = "/" element = {
       <Home 
       items={items} 
@@ -84,7 +90,10 @@ function App() {
       onAddToFavorite={onAddToFavorite}
       onAddToCart={onAddToCart}
       />}/>
-      <Route path='/favorites' />
+
+      <Route path='/favorites' element ={
+        <Favorites items={favorites}/>
+      }/>
       
       </Routes>
       
