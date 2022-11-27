@@ -16,6 +16,7 @@ function App() {
   const [searchValue, setSearchValue] = React.useState(['']);
   const [cartItems, setCartItems] = React.useState([]); // сюда передается обьект onAddToCart
   const [cartOpened , setCartOpened] = React.useState(false);
+  const[favourites, setFavourites] = React.useState(false);
 
 
 
@@ -56,6 +57,11 @@ function App() {
   const onChangeSearchInput = (event) => {
     //console.log(event.target.value);
     setSearchValue(event.target.value);
+  }
+
+  const onAddToFavourite = (obj) => {
+    axios.post('https://63760f70b5f0e1eb85017e9f.mockapi.io/favourites', obj); 
+    setFavourites((prev) => [...prev,obj]);
   }
 
   return (
