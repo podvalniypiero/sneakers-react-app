@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Card from './components/Card';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 import { useState,useEffect } from 'react';
@@ -72,11 +71,20 @@ function App() {
 
       {cartOpened && <Drawer items = {cartItems} onClose = {() => setCartOpened(false)} onRemove={onRemoveItem}/> }
 
-      <Header onClickCart = {() => setCartOpened(true) }  />
+      <Header onClickCart = {() => setCartOpened(true) }/>
 
       
       <Routes>
-      <Route path = "/" element = {<Home/>}/>
+      <Route path = "/" element = {
+      <Home 
+      items={items} 
+      searchValue={searchValue} 
+      setSearchValue={setSearchValue} 
+      onChangeSearchInput={onChangeSearchInput} 
+      onAddToFavorite={onAddToFavorite}
+      onAddToCart={onAddToCart}
+      />}/>
+      <Route path='/favorites' />
       
       </Routes>
       
@@ -85,37 +93,7 @@ function App() {
       
      
 
-     <div className="content p-40 ">
-      <div className="d-flex align-center mb-40 justify-between">
-      <h1> {(searchValue!='') ?`Поиск по запросу: "${searchValue}"` : `Все кроссовки`}</h1>
-      
-      <div className=" search-block d-flex ">
-        <img src="/img/search.svg" alt="Search..."/>
-        {searchValue && <img  
-        onClick={ () => setSearchValue('')}   
-        className='clear cu-p' 
-        src='/img/btn-remove.svg' alt='clear'/> }
 
-        <input onChange={onChangeSearchInput}  placeholder="Поиск..." value={searchValue} defaultValue=''/>
-      </div>
-      </div>
-      <div className="sneakers d-flex flex-wrap">
-        
-        {items.filter(item => item.title.toLowerCase().includes(searchValue)). 
-        map((item,index) => (
-          <Card
-          key ={index}
-          title={item.title}
-          price = {item.price}
-          imageURL = {item.imageURL}
-          onFavorite={(obj) => onAddToFavorite(obj)}
-          onPlus={(obj) => onAddToCart(obj)}
-          />
-        ))}
-
-      </div>
-
-     </div>
     </div>
   );
 }
