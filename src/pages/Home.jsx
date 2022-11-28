@@ -24,11 +24,10 @@ const Home = ({items,searchValue,setSearchValue,onChangeSearchInput,onAddToFavor
           map((item,index) => (
             <Card
             key ={index}
-            title={item.title}
-            price = {item.price}
-            imageURL = {item.imageURL}
+            
             onFavorite={(obj) => onAddToFavorite(obj)}
             onPlus={(obj) => onAddToCart(obj)}
+            {...item}
             />
           ))}
   

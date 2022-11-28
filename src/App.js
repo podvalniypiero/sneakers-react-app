@@ -33,25 +33,25 @@ function App() {
     //   setItems(json);
     // });
 
-     axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/items').then((res)=> { // получение
+     axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/items`).then((res)=> { // получение
       setItems(res.data);
     });
-    axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/cart').then((res)=> { // получение
+    axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/cart`).then((res)=> { // получение
     setCartItems(res.data);
   });
 
-  axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/favorites').then((res)=> { // получение
-  setCartItems(res.data);
-});
+  //    axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/favorites`).then((res)=> { // получение
+  // setCartItems(res.data);
+  // });
 
-    axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/favotites').then((res)=> {
+    axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/favorites`).then((res)=> {
       setFavorites(res.data);
     })
 
   },[]);
 
   const onAddToCart = (obj) => {
-    axios.post('https://63760f70b5f0e1eb85017e9f.mockapi.io/cart', obj); // отправляем запрос на сервер
+    axios.post(`https://63760f70b5f0e1eb85017e9f.mockapi.io/cart`, obj); // отправляем запрос на сервер
     setCartItems(prev => [...prev, obj]);  // визуально сохраняем в usestate
   };
 
@@ -65,8 +65,15 @@ function App() {
   };
 
   const onAddToFavorite = (obj) => {
-    axios.post('https://63760f70b5f0e1eb85017e9f.mockapi.io/favotites', obj); 
+    console.log(obj);
+    if (favorites.find ((obj) => obj.id === obj.id )) {
+      axios.delete(`https://63760f70b5f0e1eb85017e9f.mockapi.io/favorites/${obj.id}`); 
+      setFavorites((prev) => prev.filter((item) => item.id !== obj.id));
+    }
+    else {
+    axios.post(`https://63760f70b5f0e1eb85017e9f.mockapi.io/favorites`, obj); 
     setFavorites(prev => [...prev, obj]);
+    }
   };
 
   return (
@@ -92,7 +99,7 @@ function App() {
       />}/>
 
       <Route path='/favorites' element ={
-        <Favorites items={favorites}/>
+        <Favorites items={favorites} onAddToFavorite={onAddToFavorite}/>
       }/>
       
       </Routes>
