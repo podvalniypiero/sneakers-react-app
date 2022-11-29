@@ -67,6 +67,7 @@ function App() {
   const onAddToFavorite = async (obj) => {
     try{
     if (favorites.find ((favObj) => favObj.id === obj.id )) {
+      // if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id)))
       axios.delete(`https://63760f70b5f0e1eb85017e9f.mockapi.io/favorites/${obj.id}`); 
       setFavorites((prev) => prev.filter((item) => item.id !== obj.id));
     }
@@ -78,6 +79,11 @@ function App() {
    catch(error){
     alert('Не удалось добавить в избранное...');
    }
+  
+  };
+
+  const isItemAdded = (id) => {
+    return cartItems.some((obj)=> Number(obj.id) === Number(id));
   };
 
   return (
@@ -85,7 +91,7 @@ function App() {
     
     <div className="wrapper clear ">
 
-      {cartOpened && <Drawer items = {cartItems} onClose = {() => setCartOpened(false)} onRemove={onRemoveItem}/> }
+      {cartOpened && (<Drawer items = {cartItems} onClose = {() => setCartOpened(false)} onRemove={onRemoveItem}/> )}
 
       <Header onClickCart = {() => setCartOpened(true) }/>
 
@@ -103,7 +109,8 @@ function App() {
       onAddToCart={onAddToCart}
       // isLoading = {!items.length}
       isLoading = {isLoading}
-      />}/>
+      />
+      }/>
 
       <Route path='/favorites' element ={
         <Favorites items={favorites} onAddToFavorite={onAddToFavorite}/>
