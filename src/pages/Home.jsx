@@ -1,7 +1,7 @@
 
 import Card from '../components/Card';
 
-const Home = ({items,searchValue,setSearchValue,onChangeSearchInput,onAddToFavorite,onAddToCart}) => {
+const Home = ({items,cartItems,searchValue,setSearchValue,onChangeSearchInput,onAddToFavorite,onAddToCart}) => {
     
     return(
         <div className="content p-40 ">
@@ -27,6 +27,7 @@ const Home = ({items,searchValue,setSearchValue,onChangeSearchInput,onAddToFavor
             
             onFavorite={(obj) => onAddToFavorite(obj)}
             onPlus={(obj) => onAddToCart(obj)}
+            added = {cartItems.some(obj=> obj.id === item.id)}
             {...item}
             />
           ))}

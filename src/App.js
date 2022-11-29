@@ -98,6 +98,7 @@ function App() {
       <Route path = "/" element = {
       <Home 
       items={items} 
+      cartItems = {cartItems}
       searchValue={searchValue} 
       setSearchValue={setSearchValue} 
       onChangeSearchInput={onChangeSearchInput} 
