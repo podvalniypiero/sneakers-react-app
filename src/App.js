@@ -19,30 +19,23 @@ function App() {
   const [searchValue, setSearchValue] = React.useState(['']);
   const [cartItems, setCartItems] = React.useState([]); // сюда передается обьект onAddToCart
   const [cartOpened , setCartOpened] = React.useState(false);
-  const [favorites, setFavorites] = React.useState(false);
+  const [favorites, setFavorites] = React.useState([]);
 
 
 
-  React.useEffect(()=>{
+  React.useEffect ( () => {  // главную функцию useEffect нельзя делать async
 
-    // fetch('https://63760f70b5f0e1eb85017e9f.mockapi.io/items')
-    // .then( (res) => {
-    //   return res.json();
-    // })
-    // .then((json) => {
-    //   setItems(json);
-    // });
+    async function fetchData () {
+    const cartResponse = await axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/cart`);
+    const favoritesResponse = await axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/favorites`);
+    const itemsResponse =  await axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/items`);
 
-     axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/items`).then((res)=> { // получение
-      setItems(res.data);
-    });
-    axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/cart`).then((res)=> { // получение
-    setCartItems(res.data);
-  });
-
-    axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/favorites`).then((res) => {
-      setFavorites(res.data);
-    })
+    
+    setCartItems(cartResponse.data);
+    setFavorites(favoritesResponse.data);
+    setItems(itemsResponse.data);
+    }
+      fetchData();
 
   },[]);
 
