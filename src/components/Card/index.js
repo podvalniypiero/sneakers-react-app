@@ -6,7 +6,7 @@ import AppContext from '../../context';
 function Card({
   id,
   title,
-  imageUrl,
+  imageURL,
   price,
   onFavorite,
   onPlus,
@@ -15,7 +15,7 @@ function Card({
 }) {
   const { isItemAdded } = React.useContext(AppContext);
   const [isFavorite, setIsFavorite] = React.useState(favorited);
-  const obj = { id, parentId: id, title, imageUrl, price };
+  const obj = { id, parentId: id, title, imageURL, price };
 
   const onClickPlus = () => {
     onPlus(obj);
@@ -49,7 +49,7 @@ function Card({
               <img src={isFavorite ? 'img/liked.svg' : 'img/unliked.svg'} alt="Unliked" />
             </div>
           )}
-          <img width="100%" height={135} src={imageUrl} alt="Sneakers" />
+          <img width="100%" height={135} src={imageURL} alt="Sneakers" />
           <h5>{title}</h5>
           <div className="d-flex justify-between align-center">
             <div className="d-flex flex-column">

@@ -39,10 +39,11 @@ function App() {
     const favoritesResponse = await axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/favorites`);
     const itemsResponse =  await axios.get(`https://63760f70b5f0e1eb85017e9f.mockapi.io/items`);
 
-      setIsLoading(false);
-    
+    setIsLoading(false);
+   
     setCartItems(cartResponse.data);
     setFavorites(favoritesResponse.data);
+    console.log (itemsResponse.data);
     setItems(itemsResponse.data);
     }
       fetchData();
