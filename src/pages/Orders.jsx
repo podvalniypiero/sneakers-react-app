@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Lowdb from 'lowdb';
 
 import Card from '../components/Card';
 import AppContext from '../context';
@@ -12,7 +13,7 @@ function Orders() {
   React.useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get('https://63760f70b5f0e1eb85017e9f.mockapi.io/orders');
+        const { data } = await axios.get(`http://localhost:2022/orders`);
         setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);
       } catch (error) {
