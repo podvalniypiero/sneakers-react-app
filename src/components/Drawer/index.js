@@ -17,7 +17,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
   const onClickOrder = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.post('/orders', {
+      const { data } = await axios.post(`http://localhost:2022/orders`, {
         items: cartItems,
       });
       setOrderId(data.id);
@@ -26,8 +26,8 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
 
       for (let i = 0; i < cartItems.length; i++) {
         const item = cartItems[i];
-        await axios.delete('/cart/' + item.id);
-        await delay(1000);
+        await axios.delete(`http://localhost:2022/cart/` + item.id);
+        await delay(2000);
       }
     } catch (error) {
       alert('Ошибка при создании заказа :(');
