@@ -29,7 +29,7 @@ function Home({
     <div className="content p-40">
       <div className="d-flex align-center justify-between mb-40">
         <h1>{searchValue.toString().length === 0 ? `Все кроссовки`: `Поиск по запросу: "${searchValue}"`}</h1>
-        <div className="search-block d-flex">
+        <div className="search-block d-flex mr-5">
           <img src="img/search.svg" alt="Search" />
           {searchValue.toString().length !== 0 && <img
               onClick={() => setSearchValue('')}
