@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../components/Card';
+import styles from '../index.scss';
 
 function Home({
   items,
@@ -27,9 +28,10 @@ function Home({
 
   return (
     <div className="content p-40">
+
       <div className="d-flex align-center justify-between mb-40">
         <h1>{searchValue.toString().length === 0 ? `Все кроссовки`: `Поиск по запросу: "${searchValue}"`}</h1>
-        <div className="search-block d-flex mr-5">
+        <div className=" d-flex mr-5">
           <img src="img/search.svg" alt="Search" />
           {searchValue.toString().length !== 0 && <img
               onClick={() => setSearchValue('')}
@@ -38,7 +40,7 @@ function Home({
               alt="Clear"
             />  
           }
-          <input onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск..." />
+          <input className={styles.searchInput} onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск..." />
         </div>
       </div>
       <div className="d-flex flex-wrap">{renderItems()}</div>
