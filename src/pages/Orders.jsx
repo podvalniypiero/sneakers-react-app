@@ -13,7 +13,7 @@ function Orders() {
   React.useEffect(() => {
     (async () => {
       try {
-        const { data } = await axios.get(`https://server-vercel-cyan.vercel.app/orders`);
+        const { data } = await axios.get(`https://server-vercel-3kk1ulqe7-podvalniypiero.vercel.app/orders`);
         setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
         setIsLoading(false);
       } catch (error) {
