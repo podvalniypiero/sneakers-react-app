@@ -67,7 +67,7 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
             <div className="cartTotalBlock">
               <ul>
                 <li>
-                  <span>Итого:</span>
+                  <span>Цена:</span>
                   <div></div>
                   <b>{totalPrice} руб. </b>
                 </li>
@@ -76,6 +76,13 @@ function Drawer({ onClose, onRemove, items = [], opened }) {
                   <div></div>
                   <b>{Math.round((totalPrice / 100)) * 5} руб. </b>
                 </li>
+                <li>
+                  <span>Полная стоимость:</span>
+                  <div></div>
+                  <b>{Math.round((totalPrice / 100)) * 5 + totalPrice} руб. </b>
+                </li>
+                
+                
               </ul>
               <button disabled={isLoading} onClick={onClickOrder} className="greenButton">
                 Оформить заказ <img src="img/arrow.svg" alt="Arrow" />
