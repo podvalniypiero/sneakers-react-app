@@ -13,31 +13,24 @@ import Orders from './pages/Orders';
 import AppContext from './context';
 
 
-
-
-
-const arr = [
-
-];
-
 function App() {
   
   const [items, setItems] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState(['']);
-  const [cartItems, setCartItems] = React.useState([]); // сюда передается обьект onAddToCart
+  const [cartItems, setCartItems] = React.useState([]); 
   const [cartOpened , setCartOpened] = React.useState(false);
   const [favorites, setFavorites] = React.useState([]);
 
   const [isLoading, setIsLoading] = React.useState(true);
 
 
-  React.useEffect ( () => {  // главную функцию useEffect нельзя делать async
+  React.useEffect ( () => {  
 
     async function fetchData () {
       setIsLoading(true);
-    const cartResponse = await axios.get(`http://localhost:2022/cart`);
-    const favoritesResponse = await axios.get(`http://localhost:2022/favorites`);
-    const itemsResponse =  await axios.get(`http://localhost:2022/items`);
+    const cartResponse = await axios.get(`https://server-vercel-cyan.vercel.app/cart`);
+    const favoritesResponse = await axios.get(`https://server-vercel-cyan.vercel.app/favorites`);
+    const itemsResponse =  await axios.get(`https://server-vercel-cyan.vercel.app/items`);
 
     setIsLoading(false);
    
@@ -53,18 +46,18 @@ function App() {
   const onAddToCart = (obj) => {
   
     if (cartItems.find((item)=> Number(item.id) === Number(obj.id))) {
-      axios.delete(`http://localhost:2022/cart/${obj.id}`); // удаление обьекта из сервера
-      setCartItems((prev) => prev.filter(item => Number(item.id) !== Number(obj.id))) // визуально удаляем из state
+      axios.delete(`https://server-vercel-cyan.vercel.app/cart/${obj.id}`); 
+      setCartItems((prev) => prev.filter(item => Number(item.id) !== Number(obj.id))) 
     }
     else{
-       axios.post(`http://localhost:2022/cart`, obj); //добавляем на сервер
-       setCartItems((prev)=> [...prev,obj]); // визуально добавляем в state
+       axios.post(`https://server-vercel-cyan.vercel.app/cart`, obj); 
+       setCartItems((prev)=> [...prev,obj]); 
     }
   };
 
   const onRemoveItem = (id) => {
-    axios.delete(`http://localhost:2022/cart/${id}`); 
-    setCartItems((prev) => prev.filter((item) => item.id !== id));  // визуальная очистка корзины
+    axios.delete(`https://server-vercel-cyan.vercel.app/cart/${id}`); 
+    setCartItems((prev) => prev.filter((item) => item.id !== id)); 
   };
 
   const onChangeSearchInput = (event) => {
@@ -75,11 +68,11 @@ function App() {
     try{
     if (favorites.find ((favObj) => favObj.id === obj.id )) {
       // if (favorites.find((favObj) => Number(favObj.id) === Number(obj.id)))
-      axios.delete(`http://localhost:2022/favorites/${obj.id}`); 
+      axios.delete(`https://server-vercel-cyan.vercel.app/favorites/${obj.id}`); 
       setFavorites((prev) => prev.filter((item) => item.id !== obj.id));
     }
     else {
-    const {data} = await  axios.post(`http://localhost:2022/favorites`, obj); 
+    const {data} = await  axios.post(`https://server-vercel-cyan.vercel.app/favorites`, obj); 
     setFavorites(prev => [...prev, data]);
     }
   }
