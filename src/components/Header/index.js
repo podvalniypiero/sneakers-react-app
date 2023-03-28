@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useCart } from '../../hooks/useCart';
-import styles from '../../index.scss';
+import styles from './Header.module.scss';
 function Header(props) {
   const { totalPrice } = useCart();
 
@@ -17,7 +17,7 @@ function Header(props) {
           </div>
         </div>
       </Link>
-      <ul className="d-flex">
+      <ul className={styles.headerUl}>
         <li onClick={props.onClickCart} className="mr-30 cu-p">
           <img width={18} height={18} src="img/cart.svg" alt="Корзина" />
           <span>{Math.round((totalPrice / 100)) * 5 + totalPrice} руб.</span>

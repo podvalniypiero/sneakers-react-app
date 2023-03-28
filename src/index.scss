@@ -209,22 +209,3 @@ header {
   }
 }
 
-@media all and (max-width:800px){
-  header{
-    width: 100%;
-    padding: 0;
-    ul{
-      display: flex;
-      flex-direction: column;
-      justify-self: flex-start;
-      
-    }
-    li{
-      margin-right: 0px;
-      
-    }
-    .searchInput{
-      
-    }
-  }
-  }
