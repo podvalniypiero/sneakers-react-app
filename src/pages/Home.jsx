@@ -29,6 +29,7 @@ function Home({
   return (
     <div className="content p-40">
       <div className="d-flex align-center justify-between mb-40">
+        <div className={styles.container}>
         <h1>{searchValue.toString().length === 0 ? `Все кроссовки`: `Поиск по запросу: "${searchValue}"`}</h1>
         <div className="search-block d-flex">
           <img src="img/search.svg" alt="Search" />
@@ -41,8 +42,10 @@ function Home({
           }
           <input onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск..." />
         </div>
+        </div>
+        
       </div>
-      <div className="d-flex flex-wrap">{renderItems()}</div>
+      <div className=" itemsHome d-flex flex-wrap">{renderItems()}</div>
     </div>
   );
 }

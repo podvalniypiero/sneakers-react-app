@@ -64,12 +64,17 @@ header {
     }
   }
 }
-
+.container{
+ 
+}
 .search-block {
   border: 1px solid #f3f3f3;
   border-radius: 10px;
   padding: 0 15px;
   position: relative;
+  margin: 20px;
+  display: flex;
+  margin-left: 40vw;
 
   .clear {
     position: absolute;
@@ -84,14 +89,30 @@ header {
     border: 0;
     padding: 13px;
     font-size: 16px;
-    width: 200px;
+    width: 15vw;
   }
+
 }
+
+
+  .container{
+
+    display: flex;
+    flex-direction: row;
+    h1{
+      margin: 20px;
+    }
+  }
+
 .searchInput {
   border: 0;
   padding: 13px;
   font-size: 16px;
   width: 200px;
+}
+.itemsHome{
+  display: flex;
+  justify-content: center;
 }
 .cartTotalBlock {
   ul {
@@ -209,3 +230,15 @@ header {
   }
 }
 
+@media only screen and (max-width: 500px){
+  .search-block {
+    margin: 20px;
+
+    input {
+      width: 25vw;
+      display: flex;
+      justify-content: center;
+    }
+
+  }
+}

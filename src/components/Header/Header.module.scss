@@ -1,4 +1,21 @@
-@media all and (max-width:800px){
+header{
+    width: 100%;
+    padding: 0;
+    ul{
+      display: flex;
+      flex-direction: row;
+    }
+    li{
+      margin-right: 0px;
+      
+    }
+    .headerUl{
+     
+    }
+  }
+  
+
+@media only screen and (max-width: 800px){
 
     header{
       width: 100%;
@@ -6,15 +23,27 @@
       ul{
         display: flex;
         flex-direction: column;
-        justify-self: flex-start;
-        
       }
       li{
-        margin-right: 0px;
-        
+        margin-right: 0px; 
       }
-      .headerUl{
-        display: flex;
-      }
+
     }
+    }
+
+    @media only screen and (max-width: 500px){
+
+        header{
+          
+          ul{
+            display: flex;
+            flex-direction: column;
+          }
+          li{
+            margin-right: 0px;
+            margin-bottom: 15px;
+            display: flex;
+          }
+          
+        }
     }
