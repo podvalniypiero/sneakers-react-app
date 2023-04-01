@@ -25,19 +25,33 @@ function App() {
   React.useEffect ( () => {  // главную функцию useEffect нельзя делать async
 
     async function fetchData () {
-      setIsLoading(true);
-    const cartResponse = await axios.get(`http://localhost:2022/cart`);
-    const favoritesResponse = await axios.get(`http://localhost:2022/favorites`);
-    const itemsResponse =  await axios.get(`http://localhost:2022/items`);
+    try{
+        const [cartResponse,favoritesResponse,itemsResponse] = await Promise.all([
+        axios.get(`http://localhost:2022/cart`),
+        axios.get(`http://localhost:2022/favorites`),
+        axios.get(`http://localhost:2022/items`)
+      ]);
 
-    setIsLoading(false);
+        // const cartResponse = await axios.get(`http://localhost:2022/cart`);
+        // const favoritesResponse = await axios.get(`http://localhost:2022/favorites`);
+        // const itemsResponse =  await axios.get(`http://localhost:2022/items`);
+
+        setIsLoading(false);
    
-    setCartItems(cartResponse.data);
-    setFavorites(favoritesResponse.data);
-    console.log (itemsResponse.data);
-    setItems(itemsResponse.data);
+        setCartItems(cartResponse.data);
+        setFavorites(favoritesResponse.data);
+        console.log (itemsResponse.data);
+        setItems(itemsResponse.data);
     }
-      fetchData();
+    catch(error){
+      
+      alert('Ошибка получения данных');
+      console.error(error);
+    }
+     
+    }
+      
+  fetchData();
 
   },[]);
 

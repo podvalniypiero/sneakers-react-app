@@ -6,7 +6,7 @@ import Card from '../components/Card';
 import AppContext from '../context';
 
 function Orders() {
-  const { onAddToFavorite, onAddToCart } = React.useContext(AppContext);
+  // const { onAddToFavorite, onAddToCart } = React.useContext(AppContext);
   const [orders, setOrders] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -15,7 +15,7 @@ function Orders() {
       try {
         const { data } = await axios.get(`http://localhost:2022/orders`);
         setOrders(data.reduce((prev, obj) => [...prev, ...obj.items], []));
-        
+
         setIsLoading(false);
       } catch (error) {
         alert('Ошибка при запросе заказов');
