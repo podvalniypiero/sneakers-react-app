@@ -7,7 +7,7 @@ function Header(props) {
   const { totalPrice } = useCart();
 
   return (
-    <header className="d-flex justify-between align-center p-40">
+    <header className="d-flex justify-between align-center">
       <div className={styles.headerContainer}>
         <div className={styles.headerContainerLogo}>
         <Link to="/">

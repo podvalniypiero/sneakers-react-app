@@ -9,16 +9,7 @@ import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import Orders from './pages/Orders';
 
-
 import AppContext from './context';
-
-
-
-
-
-const arr = [
-
-];
 
 function App() {
   
